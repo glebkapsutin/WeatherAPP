@@ -9,7 +9,7 @@ using Microsoft.Maui.Dispatching;
 public class WeatherUImodel : INotifyPropertyChanged
 {
     private readonly WeatherService _weatherService;
-    private Color _color;
+    private Color _backgroundColor;
     private string _cityName;
     private string _temperature;
     private string _description;
@@ -17,7 +17,7 @@ public class WeatherUImodel : INotifyPropertyChanged
     private string _windKph;
     private string _cloud;
     private string _humidity;
-    private string _feelslike_c;
+    private string _feelsLike;
 
     private string _errorMessage;
     private bool _isErrorVisible;
@@ -26,58 +26,64 @@ public class WeatherUImodel : INotifyPropertyChanged
     public ICommand GetForecastCommand { get; }
     public ObservableCollection<ForecastDay> ForecastDays { get; set; }
 
-
     public event PropertyChangedEventHandler PropertyChanged;
 
     public WeatherUImodel()
     {
         _weatherService = new WeatherService();
-
         GetWeatherCommand = new Command(async () => await GetWeatherAsync());
         GetForecastCommand = new Command(async () => await GetForecastWeatherAsync());
         ForecastDays = new ObservableCollection<ForecastDay>();
-        UpdateViev();
-
+        UpdateView();
     }
-    private void UpdateViev(string condition = null)
-    {   if (string.IsNullOrEmpty(condition ))
+
+    private void UpdateView(string condition = null)
+    {
+        if (string.IsNullOrEmpty(condition))
         {
             BackgroundColor = Colors.LightGray; // Цвет по умолчанию, если данных нет
             return;
         }
+
         var hour = DateTime.Now.Hour;
+
         if (hour >= 6 && hour < 18)
-        {   
-            
-            if (condition.Contains("Rain"))
+        {
+            // Дневное время
+            if (condition.IndexOf("Rain", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 BackgroundColor = Colors.Gray; // Серый цвет для дождя
             }
-            else if (condition.Contains("Clear"))
+            else if (condition.IndexOf("Clear", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 BackgroundColor = Colors.LightBlue; // Голубой цвет для ясного неба
             }
-            else if (condition.Contains("Sunny"))
+            else if (condition.IndexOf("Sunny", StringComparison.OrdinalIgnoreCase) >= 0)
             {
-                BackgroundColor = Colors.LightYellow; // Желтый цвет для остальных условий
+                BackgroundColor = Colors.LightYellow; // Желтый цвет для солнца
+            }
+            else
+            {
+                BackgroundColor = Colors.LightYellow; // Общий дневной цвет
             }
         }
         else
         {
-            BackgroundColor = Colors.DarkBlue;
+            // Ночное время
+            BackgroundColor = Colors.DarkBlue; // Темно-синий цвет для ночи
         }
     }
-
 
     public Color BackgroundColor
     {
-        get { return _color; }
+        get => _backgroundColor;
         set
         {
-            _color = value;
-            OnPropertyChanged(nameof(Color));
+            _backgroundColor = value;
+            OnPropertyChanged();
         }
     }
+
     public string CityName
     {
         get => _cityName;
@@ -87,8 +93,6 @@ public class WeatherUImodel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-
-
 
     public string Temperature
     {
@@ -119,7 +123,8 @@ public class WeatherUImodel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-    public string WindKPH
+
+    public string WindKph
     {
         get => _windKph;
         set
@@ -128,7 +133,8 @@ public class WeatherUImodel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-    public string Cloudy
+
+    public string Cloud
     {
         get => _cloud;
         set
@@ -136,20 +142,19 @@ public class WeatherUImodel : INotifyPropertyChanged
             _cloud = value;
             OnPropertyChanged();
         }
-
     }
 
-    public string Feelslike
+    public string FeelsLike
     {
-        get => _feelslike_c;
+        get => _feelsLike;
         set
         {
-            _feelslike_c = value;
+            _feelsLike = value;
             OnPropertyChanged();
         }
     }
 
-    public string Humidity_Weather
+    public string Humidity
     {
         get => _humidity;
         set
@@ -158,7 +163,6 @@ public class WeatherUImodel : INotifyPropertyChanged
             OnPropertyChanged();
         }
     }
-
 
     public string ErrorMessage
     {
@@ -180,7 +184,6 @@ public class WeatherUImodel : INotifyPropertyChanged
         }
     }
 
-
     private async Task GetWeatherAsync()
     {
         IsErrorVisible = false;
@@ -197,19 +200,18 @@ public class WeatherUImodel : INotifyPropertyChanged
 
             var weather = await _weatherService.GetCurrentWeatherResponseAsync(CityName);
 
-
             if (weather != null)
             {
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
                     Temperature = $"{weather.Current.Temp_C}°C";
-                    Feelslike = $"Ощущается как {weather.Current.Feelslike_C}°C";
-                    Humidity_Weather = $"Влажность {weather.Current.Humidity}%";
-                    WindKPH = $"Ветер {weather.Current.Wind_Kph} км/ч";
-                    Cloudy = $"Облачность {weather.Current.Cloud}%";
+                    FeelsLike = $"Ощущается как {weather.Current.Feelslike_C}°C";
+                    Humidity = $"Влажность {weather.Current.Humidity}%";
+                    WindKph = $"Ветер {weather.Current.Wind_Kph} км/ч";
+                    Cloud = $"Облачность {weather.Current.Cloud}%";
                     Description = weather.Current.Condition.Text;
                     Icon = $"https:{weather.Current.Condition.Icon}";
-                    UpdateViev(weather.Current.Condition.Text);
+                    UpdateView(weather.Current.Condition.Text);
                 });
             }
             else
@@ -231,8 +233,8 @@ public class WeatherUImodel : INotifyPropertyChanged
 
             Console.WriteLine($"Error: {ex.Message}");
         }
-
     }
+
     private async Task GetForecastWeatherAsync()
     {
         IsErrorVisible = false;
@@ -243,13 +245,13 @@ public class WeatherUImodel : INotifyPropertyChanged
             if (string.IsNullOrWhiteSpace(CityName))
             {
                 IsErrorVisible = true;
-                ErrorMessage = "Введите название города";
+                ErrorMessage = "Введите название города.";
                 return;
             }
 
             var forecast = await _weatherService.GetForecastAsync(CityName);
 
-            if (forecast != null && forecast.Forecast != null && forecast.Forecast.ForecastDays != null)
+            if (forecast != null && forecast.Forecast?.ForecastDays != null)
             {
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
@@ -277,10 +279,9 @@ public class WeatherUImodel : INotifyPropertyChanged
                 ErrorMessage = "Произошла ошибка при получении данных. Проверьте подключение к интернету.";
             });
 
+            Console.WriteLine($"Error: {ex.Message}");
         }
     }
-
-
 
     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
     {

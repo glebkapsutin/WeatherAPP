@@ -1,0 +1,131 @@
+﻿<!-- Обновленный MainPage.xaml -->
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WeatherAPP"
+             x:Class="WeatherAPP.MainPage"
+             BackgroundColor="{Binding BackgroundColor}">
+
+    <StackLayout Padding="20" Spacing="10">
+
+        <!-- Ввод названия города -->
+        <Entry
+            Placeholder="Введите название города"
+            Text="{Binding CityName}"
+            FontSize="20"
+            TextColor="{StaticResource Black}"
+            Margin="0,20,0,0"
+            x:Name="CityNameEntry"
+            Keyboard="Default"
+            BackgroundColor="{StaticResource Gray100}"/>
+
+        <!-- Кнопки для получения данных о погоде -->
+        <StackLayout Orientation="Horizontal" Spacing="10">
+            <Button
+                Text="Погода на день"
+                Command="{Binding GetWeatherCommand}"
+                BackgroundColor="{StaticResource PrimaryColor}"
+                TextColor="{StaticResource TextColor}"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                Padding="10"
+                x:Name="GetWeatherButton"/>
+
+            <Button
+                Text="Погода на неделю"
+                Command="{Binding GetForecastCommand}"
+                BackgroundColor="{StaticResource PrimaryColor}"
+                TextColor="{StaticResource TextColor}"
+                FontAttributes="Bold"
+                CornerRadius="10"
+                Padding="10"
+                x:Name="GetForecastButton"/>
+        </StackLayout>
+
+        <!-- CollectionView для отображения прогноза на неделю -->
+        <CollectionView ItemsSource="{Binding ForecastDays}" Margin="0,20,0,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame CornerRadius="10" Padding="10" Margin="0,5,0,5" BackgroundColor="{StaticResource Gray100}">
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Label Text="{Binding Date, StringFormat='{0}'}"
+                                   FontSize="20"
+                                   TextColor="{StaticResource Tertiary}"
+                                   HorizontalOptions="Start"/>
+                            <Label Text="{Binding Day.MaxTemp_C, StringFormat='Макс: {0}°C'}"
+                                   TextColor="{StaticResource Tertiary}"
+                                   FontSize="15"/>
+                            <Label Text="{Binding Day.MinTemp_C, StringFormat='Мин: {0}°C'}"
+                                   TextColor="{StaticResource Tertiary}"
+                                   FontSize="15"/>
+                            <Label Text="{Binding Day.AvgTemp_C, StringFormat='Средн: {0}°C'}"
+                                   TextColor="{StaticResource Tertiary}"
+                                   FontSize="15"/>
+                            <Label Text="{Binding Day.MaxWind_Kph, StringFormat='Макс. ветер: {0} км/ч'}"
+                                   TextColor="{StaticResource Tertiary}"
+                                   FontSize="15"/>
+                            <Label Text="{Binding Day.MinWind_Kph, StringFormat='Мин. ветер: {0} км/ч'}"
+                                   TextColor="{StaticResource Tertiary}"
+                                   FontSize="15"/>
+                            <Image Source="{Binding Day.Condition.Icon, StringFormat='https:{0}'}"
+                                   WidthRequest="30"
+                                   HeightRequest="30"/>
+                            <Label Text="{Binding Day.Condition.Text}"
+                                   FontSize="15"
+                                   TextColor="{StaticResource Tertiary}"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Блок с текущей погодой -->
+        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" Spacing="10">
+            <Image
+                Source="{Binding Icon}"
+                WidthRequest="100"
+                HeightRequest="100"
+                x:Name="WeatherIcon"/>
+            <StackLayout>
+                <Label
+                    Text="{Binding Description}"
+                    FontSize="40"
+                    TextColor="{StaticResource PrimaryColor}"
+                    x:Name="WeatherDescription"/>
+                <Label
+                    Text="{Binding Temperature}"
+                    FontSize="30"
+                    TextColor="{StaticResource Tertiary}"
+                    x:Name="TemperatureLabel"/>
+                <Label
+                    Text="{Binding Feelslike}"
+                    FontSize="28"
+                    TextColor="{StaticResource Tertiary}"
+                    x:Name="FeelslikeLabel"/>
+                <Label
+                    Text="{Binding Humidity_Weather}"
+                    FontSize="28"
+                    TextColor="{StaticResource Tertiary}"
+                    x:Name="HumidityLabel"/>
+                <Label
+                    Text="{Binding WindKPH}"
+                    FontSize="28"
+                    TextColor="{StaticResource Tertiary}"
+                    x:Name="WindKphLabel"/>
+                <Label
+                    Text="{Binding Cloudy}"
+                    FontSize="28"
+                    TextColor="{StaticResource Tertiary}"
+                    x:Name="CloudLabel"/>
+            </StackLayout>
+        </StackLayout>
+
+        <!-- Сообщение об ошибке -->
+        <Label
+            Text="{Binding ErrorMessage}"
+            FontSize="16"
+            TextColor="Red"
+            IsVisible="{Binding IsErrorVisible}"
+            Margin="10,20,10,0"
+            x:Name="ErrorMessageLabel"/>
+    </StackLayout>
+</ContentPage>

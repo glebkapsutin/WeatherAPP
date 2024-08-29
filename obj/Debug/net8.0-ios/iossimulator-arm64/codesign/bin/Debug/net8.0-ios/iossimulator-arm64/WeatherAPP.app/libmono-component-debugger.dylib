@@ -1,0 +1,1 @@
+-v --force --timestamp=none --sign - /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/bin/Debug/net8.0-ios/iossimulator-arm64/WeatherAPP.app/libmono-component-debugger.dylib

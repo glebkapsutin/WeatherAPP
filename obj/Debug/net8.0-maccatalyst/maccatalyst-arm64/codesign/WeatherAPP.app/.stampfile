@@ -1,0 +1,1 @@
+-v --force --timestamp=none --sign - --entitlements /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/Entitlements.xcent /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/bin/Debug/net8.0-maccatalyst/maccatalyst-arm64/WeatherAPP.app

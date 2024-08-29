@@ -300,6 +300,7 @@
 /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/WeatherAPP.pdb
 /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/WeatherAPP.genruntimeconfig.cache
 /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/ref/WeatherAPP.dll
+/Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/WeatherAPP.sourcelink.json
 /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resourcestamps/Microsoft.CSharp.stamp
 /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resourcestamps/Microsoft.Extensions.Configuration.Abstractions.stamp
 /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-maccatalyst/maccatalyst-arm64/resourcestamps/Microsoft.Extensions.Configuration.stamp

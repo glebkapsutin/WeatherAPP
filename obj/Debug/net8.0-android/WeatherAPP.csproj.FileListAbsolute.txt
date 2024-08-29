@@ -1083,3 +1083,4 @@
 /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-android/lp/159/jl/files.cache
 /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-android/lp/160/jl/files.cache
 /Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-android/lp/161/jl/files.cache
+/Users/glebkapustin/Desktop/Cods/WeatherAPP/WeatherAPP/WeatherAPP/obj/Debug/net8.0-android/WeatherAPP.sourcelink.json

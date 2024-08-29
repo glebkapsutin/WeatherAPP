@@ -102,17 +102,17 @@
                     TextColor="{StaticResource Tertiary}"
                     x:Name="FeelslikeLabel"/>
                 <Label
-                    Text="{Binding Humidity_Weather}"
+                    Text="{Binding Humidity}"
                     FontSize="28"
                     TextColor="{StaticResource Tertiary}"
                     x:Name="HumidityLabel"/>
                 <Label
-                    Text="{Binding WindKPH}"
+                    Text="{Binding WindKph}"
                     FontSize="28"
                     TextColor="{StaticResource Tertiary}"
                     x:Name="WindKphLabel"/>
                 <Label
-                    Text="{Binding Cloudy}"
+                    Text="{Binding Cloud}"
                     FontSize="28"
                     TextColor="{StaticResource Tertiary}"
                     x:Name="CloudLabel"/>

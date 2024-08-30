@@ -147,6 +147,13 @@
 			xkctCH0Xqx7gsEpCHTfVgq/gQiyctZ25WQLDAV96NlU=
 			</data>
 		</dict>
+		<key>MonoBundle/Microsoft.Maui.Controls.HotReload.Forms.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ANnfbCCZY3SPvG19sL+UbP50hJOBW4Bp+NA+8eCO5HE=
+			</data>
+		</dict>
 		<key>MonoBundle/Microsoft.Maui.Controls.Xaml.dll</key>
 		<dict>
 			<key>hash2</key>
@@ -194,6 +201,20 @@
 			<key>hash2</key>
 			<data>
 			GLNwMVguoLYRgW7HbGzhU2+gMPbuBQ2Q0JlSC0rNwDU=
+			</data>
+		</dict>
+		<key>MonoBundle/Microsoft.VisualStudio.DesignTools.MobileTapContracts.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vt34Wgj0M5Hsfy53OxY8Z7nFGDNCNulQ8cY+VD/SqAo=
+			</data>
+		</dict>
+		<key>MonoBundle/Microsoft.VisualStudio.DesignTools.TapContract.dll</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			N/FWDjaCAHJeFeGiU7WaVdfIvAlDBkEpa6O8fubcBDo=
 			</data>
 		</dict>
 		<key>MonoBundle/Microsoft.Win32.Primitives.dll</key>
@@ -1376,14 +1397,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zxU2ls7bP87Toam4mkHOsD9ceXwZ0DLCsQ8WoLQxaCw=
+			J+/MfNit2H1I7xVlaWIBiiOTzIMmaUYCCloWnNObug4=
 			</data>
 		</dict>
 		<key>MonoBundle/WeatherAPP.pdb</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Mr9zUHuqajTw72iNkhu3CbM9BCHqcABjl6QJxuaQQrA=
+			5XNmopoUcVNXJ7UwBpBMJ4cfQBp7/wwvdgPz0BJht0U=
 			</data>
 		</dict>
 		<key>MonoBundle/WindowsBase.dll</key>

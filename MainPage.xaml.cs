@@ -20,6 +20,7 @@ namespace WeatherAPP
             scaleButton2.Commit(this, "ScaleAnimation2", length: 1000, easing: Easing.Linear);
         }
         
+        
        
 
     }

@@ -127,5 +127,6 @@
             IsVisible="{Binding IsErrorVisible}"
             Margin="10,20,10,0"
             x:Name="ErrorMessageLabel"/>
+        <ContentView Content="{Binding WeatherAnim}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
     </StackLayout>
 </ContentPage>

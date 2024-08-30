@@ -1,15 +1,17 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using WeatherAPP.Animations;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.Dispatching;
+
 
 public class WeatherUImodel : INotifyPropertyChanged
 {
     private readonly WeatherService _weatherService;
     private Color _backgroundColor;
+
+    private GraphicsView _weatherAnim;
     private string _cityName;
     private string _temperature;
     private string _description;
@@ -42,12 +44,13 @@ public class WeatherUImodel : INotifyPropertyChanged
         if (string.IsNullOrEmpty(condition))
         {
             BackgroundColor = Colors.LightGray; // Цвет по умолчанию, если данных нет
+            WeatherAnim = null;
             return;
         }
 
         var hour = DateTime.Now.Hour;
 
-        if (hour >= 6 && hour < 18)
+        if (hour >= 5 && hour < 20)
         {
             // Дневное время
             if (condition.IndexOf("Rain", StringComparison.OrdinalIgnoreCase) >= 0)
@@ -61,16 +64,30 @@ public class WeatherUImodel : INotifyPropertyChanged
             else if (condition.IndexOf("Sunny", StringComparison.OrdinalIgnoreCase) >= 0)
             {
                 BackgroundColor = Colors.LightYellow; // Желтый цвет для солнца
+                WeatherAnim = new SunAnimation();
+
             }
             else
             {
-                BackgroundColor = Colors.LightYellow; // Общий дневной цвет
+                BackgroundColor = Colors.LightYellow;
+                WeatherAnim = null; // Общий дневной цвет
             }
         }
         else
         {
             // Ночное время
-            BackgroundColor = Colors.DarkBlue; // Темно-синий цвет для ночи
+            BackgroundColor = Colors.Black;
+            WeatherAnim = new NightAnimations(); // Темно-синий цвет для ночи
+        }
+    }
+
+    public GraphicsView? WeatherAnim
+    {
+        get => _weatherAnim;
+        set
+        {
+            _weatherAnim = value;
+            OnPropertyChanged();
         }
     }
 
